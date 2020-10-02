@@ -8,14 +8,13 @@ var connect = require('gulp-connect')
 var replace = require('gulp-replace')
 var ghPages = require('gulp-gh-pages')
 var bower = require('gulp-bower')
-var image = require('gulp-image')
 var stylus = require('gulp-stylus')
 var minify = require('gulp-minify')
 var path = require('path')
 var fs = require('fs')
 var cheerio = require('cheerio')
 
-var build_dir = 'DailyDialog-plusplus/' // good to have this be the same as the repo name for gh-pages purposes
+var build_dir = 'holl-e-website/' // good to have this be the same as the repo name for gh-pages purposes
 
 var rankEntries = function (entries) {
   entries.sort(function(a, b) {
@@ -128,11 +127,6 @@ gulp.task('bower', function () {
     .pipe(gulp.dest('./' + build_dir + 'bower_components/'))
 })
 
-gulp.task('image', function () {
-  return gulp.src('./views/images/*')
-    .pipe(image())
-    .pipe(gulp.dest('./' + build_dir))
-})
 
 gulp.task('js', function () {
   return gulp.src('./views/js/*')
@@ -281,4 +275,4 @@ gulp.task('deploy', function () {
 
 gulp.task('generate_exploration', exploration_tasks)
 gulp.task('generate', ['bower', 'generate_exploration', 'generate_index', 'process_comp_output'])
-gulp.task('default', ['generate', 'correct_link_paths', 'image', 'js', 'css', 'copy_dataset', 'copy_models'])
+gulp.task('default', ['generate', 'correct_link_paths', 'js', 'css', 'copy_dataset', 'copy_models'])
